@@ -2,7 +2,7 @@
 
 main() {
 
-VERSION="1.0.4"
+VERSION="1.0.5"
 CATALOG_URL="https://raw.githubusercontent.com/iMrLopez/headunit-adb-scripts/refs/heads/main/app-catalog.json"
 
 TEMP_DIR=$(mktemp -d)
@@ -193,6 +193,10 @@ for i in "${!QUEUE_PATHS[@]}"; do
     echo "Installing ${QUEUE_NAMES[$i]}..."
     "$ADB_CMD" -s "$DEVICE_IP" install "${QUEUE_PATHS[$i]}"
 done
+
+echo ""
+echo "All done."
+exit 0
 
 }
 
