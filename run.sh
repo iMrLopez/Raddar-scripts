@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.0.0"
+VERSION="1.0.1"
 CATALOG_URL="https://raw.githubusercontent.com/iMrLopez/headunit-adb-scripts/refs/heads/main/app-catalog.json"
 
 TEMP_DIR=$(mktemp -d)

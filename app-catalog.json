@@ -28,5 +28,10 @@
     "name": "Leco launcher (latest official download)",
     "type": "directdownload",
     "source": "https://cos.lecoauto.com/update/%E4%B9%90%E9%85%B7%E6%A1%8C%E9%9D%A2_1.8.7.1_%E6%99%AE%E9%80%9A_sign.apk"
+  },
+  {
+    "name": "Xuper TV (source iMrLopez/head-unit-apps)",
+    "type": "directdownload",
+    "source": "https://github.com/iMrLopez/head-unit-apps/releases/download/xuper-tv/com.lite.fczx.apk"
   }
 ]

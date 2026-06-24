@@ -1,6 +1,6 @@
 $ProgressPreference = 'SilentlyContinue'
 
-$Version = "1.0.0"
+$Version = "1.0.1"
 $CatalogUrl = "https://raw.githubusercontent.com/iMrLopez/headunit-adb-scripts/refs/heads/main/app-catalog.json"
 $NoCacheHeaders = @{ 'Cache-Control' = 'no-cache'; 'Pragma' = 'no-cache' }
 
