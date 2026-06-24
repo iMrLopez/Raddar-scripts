@@ -1,6 +1,8 @@
 #!/bin/bash
 
-VERSION="1.0.3"
+main() {
+
+VERSION="1.0.4"
 CATALOG_URL="https://raw.githubusercontent.com/iMrLopez/headunit-adb-scripts/refs/heads/main/app-catalog.json"
 
 TEMP_DIR=$(mktemp -d)
@@ -30,8 +32,8 @@ cleanup() {
 trap 'echo ""; echo "Cancelled, cleaning up..."; exit 130' INT TERM
 trap cleanup EXIT
 
-# When piped via "curl | bash", stdin is the pipe carrying the script so read
-# gets EOF immediately. Redirect stdin to the terminal so all prompts work.
+# Redirect stdin to the terminal so read prompts work when piped via curl | bash.
+# Must be inside main() so the entire script is buffered before this runs.
 exec < /dev/tty
 
 echo "Fetching app catalog..."
@@ -191,3 +193,7 @@ for i in "${!QUEUE_PATHS[@]}"; do
     echo "Installing ${QUEUE_NAMES[$i]}..."
     "$ADB_CMD" -s "$DEVICE_IP" install "${QUEUE_PATHS[$i]}"
 done
+
+}
+
+main "$@"
