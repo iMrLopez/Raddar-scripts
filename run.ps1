@@ -1,6 +1,8 @@
 $ProgressPreference = 'SilentlyContinue'
 
+$Version = "1.0.0"
 $CatalogUrl = "https://raw.githubusercontent.com/iMrLopez/headunit-adb-scripts/refs/heads/main/app-catalog.json"
+$NoCacheHeaders = @{ 'Cache-Control' = 'no-cache'; 'Pragma' = 'no-cache' }
 
 $TempDir = Join-Path $env:TEMP ([System.IO.Path]::GetRandomFileName())
 New-Item -ItemType Directory -Path $TempDir | Out-Null
@@ -15,12 +17,12 @@ Write-Host "Head Unit ADB Script" -ForegroundColor White -NoNewline
 Write-Host "                                 ║" -ForegroundColor Cyan
 Write-Host "║    ADB-based Android APK installer for head units    ║" -ForegroundColor Cyan
 Write-Host "║                                                      ║" -ForegroundColor Cyan
-Write-Host "║                                      " -ForegroundColor Cyan -NoNewline
-Write-Host "by iMrLopez" -ForegroundColor DarkCyan -NoNewline
+Write-Host "║                              " -ForegroundColor Cyan -NoNewline
+Write-Host "by iMrLopez · 2025" -ForegroundColor DarkCyan -NoNewline
 Write-Host "     ║" -ForegroundColor Cyan
 Write-Host "║                                              " -ForegroundColor Cyan -NoNewline
-Write-Host "2025" -ForegroundColor DarkCyan -NoNewline
-Write-Host "     ║" -ForegroundColor Cyan
+Write-Host "v$Version" -ForegroundColor DarkCyan -NoNewline
+Write-Host "  ║" -ForegroundColor Cyan
 Write-Host "╚══════════════════════════════════════════════════════╝" -ForegroundColor Cyan
 Write-Host ""
 
@@ -64,7 +66,7 @@ try {
     # ── App selection ────────────────────────────────────────────────────────
 
     Write-Host "Fetching app catalog..."
-    $Apps = (Invoke-WebRequest -Uri $CatalogUrl -UseBasicParsing).Content | ConvertFrom-Json
+    $Apps = (Invoke-WebRequest -Uri $CatalogUrl -UseBasicParsing -Headers $NoCacheHeaders).Content | ConvertFrom-Json
 
     Write-Host "Available apps to install:"
     for ($i = 0; $i -lt $Apps.Count; $i++) {

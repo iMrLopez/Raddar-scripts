@@ -1,5 +1,6 @@
 #!/bin/bash
 
+VERSION="1.0.0"
 CATALOG_URL="https://raw.githubusercontent.com/iMrLopez/headunit-adb-scripts/refs/heads/main/app-catalog.json"
 
 TEMP_DIR=$(mktemp -d)
@@ -16,8 +17,8 @@ printf '║                                                      ║\n'
 printf "║    ${BOLD}Head Unit ADB Script${RESET}${CYAN}                              ║\n"
 printf '║    ADB-based Android APK installer for head units    ║\n'
 printf '║                                                      ║\n'
-printf "║                                      ${DIM}by iMrLopez${RESET}${CYAN}     ║\n"
-printf "║                                              ${DIM}2025${RESET}${CYAN}    ║\n"
+printf "║                              ${DIM}by iMrLopez · 2025${RESET}${CYAN}      ║\n"
+printf "║                                              ${DIM}v${VERSION}${RESET}${CYAN}  ║\n"
 printf '╚══════════════════════════════════════════════════════╝\n'
 printf "${RESET}\n"
 
@@ -30,7 +31,7 @@ trap 'echo ""; echo "Cancelled, cleaning up..."; exit 130' INT TERM
 trap cleanup EXIT
 
 echo "Fetching app catalog..."
-APPS_CATALOG=$(curl -fsSL "$CATALOG_URL") || { echo "Failed to fetch app catalog." >&2; exit 1; }
+APPS_CATALOG=$(curl -fsSL -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' "$CATALOG_URL") || { echo "Failed to fetch app catalog." >&2; exit 1; }
 
 # ── App selection ────────────────────────────────────────────────────────────
 
