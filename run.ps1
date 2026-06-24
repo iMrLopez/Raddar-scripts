@@ -1,3 +1,5 @@
+$ProgressPreference = 'SilentlyContinue'
+
 $CatalogUrl = "https://raw.githubusercontent.com/iMrLopez/headunit-adb-scripts/refs/heads/main/app-catalog.json"
 
 $TempDir = Join-Path $env:TEMP ([System.IO.Path]::GetRandomFileName())
