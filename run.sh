@@ -5,6 +5,22 @@ CATALOG_URL="https://raw.githubusercontent.com/iMrLopez/headunit-adb-scripts/ref
 TEMP_DIR=$(mktemp -d)
 ADB_CMD=""
 
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+DIM='\033[2m'
+RESET='\033[0m'
+
+printf "${CYAN}"
+printf '╔══════════════════════════════════════════════════════╗\n'
+printf '║                                                      ║\n'
+printf "║    ${BOLD}Head Unit ADB Script${RESET}${CYAN}                                 ║\n"
+printf '║    ADB-based Android APK installer for head units    ║\n'
+printf '║                                                      ║\n'
+printf "║                                      ${DIM}by iMrLopez${RESET}${CYAN}     ║\n"
+printf "║                                              ${DIM}2025${RESET}${CYAN}     ║\n"
+printf '╚══════════════════════════════════════════════════════╝\n'
+printf "${RESET}\n"
+
 echo "Using temp directory: $TEMP_DIR"
 
 cleanup() {

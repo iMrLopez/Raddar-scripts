@@ -4,6 +4,23 @@ $TempDir = Join-Path $env:TEMP ([System.IO.Path]::GetRandomFileName())
 New-Item -ItemType Directory -Path $TempDir | Out-Null
 $AdbCmd = $null
 
+Write-Host ""
+Write-Host "╔══════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+Write-Host "║                                                      ║" -ForegroundColor Cyan
+Write-Host "║    " -ForegroundColor Cyan -NoNewline
+Write-Host "Head Unit ADB Script" -ForegroundColor White -NoNewline
+Write-Host "                                 ║" -ForegroundColor Cyan
+Write-Host "║    ADB-based Android APK installer for head units    ║" -ForegroundColor Cyan
+Write-Host "║                                                      ║" -ForegroundColor Cyan
+Write-Host "║                                      " -ForegroundColor Cyan -NoNewline
+Write-Host "by iMrLopez" -ForegroundColor DarkCyan -NoNewline
+Write-Host "     ║" -ForegroundColor Cyan
+Write-Host "║                                              " -ForegroundColor Cyan -NoNewline
+Write-Host "2025" -ForegroundColor DarkCyan -NoNewline
+Write-Host "     ║" -ForegroundColor Cyan
+Write-Host "╚══════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+Write-Host ""
+
 Write-Host "Using temp directory: $TempDir"
 
 function Invoke-Download {

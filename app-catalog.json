@@ -1,26 +1,31 @@
 [
   {
-    "name": "Head Unit Revived (Nuevo Head Unit Reloaded)",
+    "name": "Head Unit Revived (Nuevo Head Unit Reloaded) (source iMrLopez/android-auto-carplay-geely)",
     "type": "gitrelease",
     "source": "andreknieriem/headunit-revived"
   },
   {
-    "name": "Autokit 2025.03.19.1126",
+    "name": "Autokit 2025.03.19.1126 (source iMrLopez/android-auto-carplay-geely)",
     "type": "directdownload",
     "source": "https://github.com/iMrLopez/head-unit-apps/raw/refs/heads/main/AutoKit_2025.03.19.1126%20(1).apk"
   },
   {
-    "name": "Head Unit Reloaded 7.0.3",
+    "name": "ES File Explorer 4.4 (source iMrLopez/android-auto-carplay-geely)",
+    "type": "directdownload",
+    "source": "https://github.com/iMrLopez/head-unit-apps/releases/download/ex-file-explorer-44/ES-File.Explorer.44.apk"
+  },
+  {
+    "name": "Head Unit Reloaded 7.0.3 (source iMrLopez/android-auto-carplay-geely)",
     "type": "directdownload",
     "source": "https://github.com/iMrLopez/android-auto-carplay-geely/raw/refs/heads/main/Apps/Android%20auto%20and%20Carplay/HUR_7.0.3%20-%20android%20auto.apk"
   },
   {
-    "name": "Aptoide (latest)",
+    "name": "Aptoide (latest official download)",
     "type": "directdownload",
     "source": "https://pool.apk.aptoide.com/aptoide-web/cm-aptoide-pt-12060-71289868-2725e9ae81839a4ae69f8f362fc4d7e1.apk?apk_name=aptoide"
   },
   {
-    "name": "Leco launcher (latest)",
+    "name": "Leco launcher (latest official download)",
     "type": "directdownload",
     "source": "https://cos.lecoauto.com/update/%E4%B9%90%E9%85%B7%E6%A1%8C%E9%9D%A2_1.8.7.1_%E6%99%AE%E9%80%9A_sign.apk"
   }
