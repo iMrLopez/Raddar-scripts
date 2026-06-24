@@ -30,29 +30,43 @@ Write-Host "Using temp directory: $TempDir"
 
 function Invoke-Download {
     param([string]$Uri, [string]$OutFile, [string]$Label)
-    $client = New-Object System.Net.WebClient
-    $global:_dlDone = $false
-    $global:_dlError = $null
-    Register-ObjectEvent -InputObject $client -EventName DownloadProgressChanged -SourceIdentifier "_dlProgress" -Action {
-        $pct      = $EventArgs.ProgressPercentage
-        $received = [math]::Round($EventArgs.BytesReceived / 1MB, 1)
-        $total    = [math]::Round($EventArgs.TotalBytesToReceive / 1MB, 1)
-        Write-Progress -Activity $Label -Status "$received MB / $total MB" -PercentComplete $pct
-    } | Out-Null
-    Register-ObjectEvent -InputObject $client -EventName DownloadFileCompleted -SourceIdentifier "_dlDone" -Action {
-        $global:_dlDone = $true
-        if ($EventArgs.Error) { $global:_dlError = $EventArgs.Error }
-    } | Out-Null
+    $prevPref = $global:ProgressPreference
+    $global:ProgressPreference = 'Continue'
+    $client     = $null
+    $response   = $null
+    $stream     = $null
+    $fileStream = $null
     try {
-        $client.DownloadFileAsync([Uri]$Uri, $OutFile)
-        while (-not $global:_dlDone) { Start-Sleep -Milliseconds 100 }
+        $client = New-Object System.Net.Http.HttpClient
+        $client.DefaultRequestHeaders.Add('User-Agent', 'PowerShell')
+        $response = $client.GetAsync($Uri, [System.Net.Http.HttpCompletionOption]::ResponseHeadersRead).GetAwaiter().GetResult()
+        if (-not $response.IsSuccessStatusCode) { throw "HTTP $([int]$response.StatusCode) $($response.ReasonPhrase)" }
+        $totalBytes = $response.Content.Headers.ContentLength
+        $stream     = $response.Content.ReadAsStreamAsync().GetAwaiter().GetResult()
+        $fileStream = [System.IO.File]::Create($OutFile)
+        $buffer     = New-Object byte[] 65536
+        $totalRead  = [long]0
+        while ($true) {
+            $read = $stream.Read($buffer, 0, $buffer.Length)
+            if ($read -le 0) { break }
+            $fileStream.Write($buffer, 0, $read)
+            $totalRead += $read
+            if ($totalBytes -gt 0) {
+                $pct     = [int](($totalRead / $totalBytes) * 100)
+                $mb      = [math]::Round($totalRead  / 1MB, 1)
+                $totalMb = [math]::Round($totalBytes / 1MB, 1)
+                Write-Progress -Activity $Label -Status "$mb MB / $totalMb MB" -PercentComplete $pct
+            } else {
+                Write-Progress -Activity $Label -Status "$([math]::Round($totalRead / 1MB, 1)) MB downloaded"
+            }
+        }
         Write-Progress -Activity $Label -Completed
-        if ($global:_dlError) { throw $global:_dlError }
     } finally {
-        Unregister-Event -SourceIdentifier "_dlProgress" -ErrorAction SilentlyContinue
-        Unregister-Event -SourceIdentifier "_dlDone"     -ErrorAction SilentlyContinue
-        $client.Dispose()
-        Remove-Variable _dlDone, _dlError -Scope Global -ErrorAction SilentlyContinue
+        if ($fileStream) { $fileStream.Dispose() }
+        if ($stream)     { $stream.Dispose() }
+        if ($response)   { $response.Dispose() }
+        if ($client)     { $client.Dispose() }
+        $global:ProgressPreference = $prevPref
     }
 }
 
