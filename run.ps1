@@ -1,36 +1,4 @@
-# App catalog — add entries here to make them available in the menu.
-# type "gitrelease"     -> "source" is "owner/repo"; fetches the first .apk from the latest GitHub release
-# type "gitcollection"  -> "source" is "owner/repo"; lists all .apk assets from the latest release as a sub-menu
-# type "directdownload" -> "source" is a direct URL to an .apk file
-$AppsCatalog = @'
-[
-  {
-    "name": "Head Unit Revived (Nuevo Head Unit Reloaded)",
-    "type": "gitrelease",
-    "source": "andreknieriem/headunit-revived"
-  },
-  {
-    "name": "Autokit 2025.03.19.1126",
-    "type": "directdownload",
-    "source": "https://omo-oss-file110.thefastfile.com/portal-saas/pg2026012818440705289/cms/file/autokit_2025.03.19.1126.apk"
-  },
-  {
-    "name": "Head Unit Reloaded 7.0.3",
-    "type": "directdownload",
-    "source": "https://github.com/iMrLopez/android-auto-carplay-geely/raw/refs/heads/main/Apps/Android%20auto%20and%20Carplay/HUR_7.0.3%20-%20android%20auto.apk"
-  },
-  {
-    "name": "Aptoide (latest)",
-    "type": "directdownload",
-    "source": "https://pool.apk.aptoide.com/aptoide-web/cm-aptoide-pt-12060-71289868-2725e9ae81839a4ae69f8f362fc4d7e1.apk?apk_name=aptoide"
-  },
-  {
-    "name": "Leco launcher (latest)",
-    "type": "directdownload",
-    "source": "https://cos.lecoauto.com/update/%E4%B9%90%E9%85%B7%E6%A1%8C%E9%9D%A2_1.8.7.1_%E6%99%AE%E9%80%9A_sign.apk"
-  }
-]
-'@
+$CatalogUrl = "https://raw.githubusercontent.com/iMrLopez/headunit-adb-scripts/refs/heads/main/app-catalog.json"
 
 $TempDir = Join-Path $env:TEMP ([System.IO.Path]::GetRandomFileName())
 New-Item -ItemType Directory -Path $TempDir | Out-Null
@@ -75,7 +43,8 @@ function Invoke-Cleanup {
 try {
     # ── App selection ────────────────────────────────────────────────────────
 
-    $Apps = $AppsCatalog | ConvertFrom-Json
+    Write-Host "Fetching app catalog..."
+    $Apps = (Invoke-WebRequest -Uri $CatalogUrl -UseBasicParsing).Content | ConvertFrom-Json
 
     Write-Host "Available apps to install:"
     for ($i = 0; $i -lt $Apps.Count; $i++) {

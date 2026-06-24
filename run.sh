@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CATALOG_URL="https://raw.githubusercontent.com/iMrLopez/Raddar-scripts/refs/heads/main/app-catalog.json"
+CATALOG_URL="https://raw.githubusercontent.com/iMrLopez/headunit-adb-scripts/refs/heads/main/app-catalog.json"
 
 TEMP_DIR=$(mktemp -d)
 ADB_CMD=""
@@ -11,6 +11,9 @@ cleanup() {
     [ -d "$TEMP_DIR" ] && rm -rf "$TEMP_DIR"
 }
 trap cleanup EXIT
+
+echo "Fetching app catalog..."
+APPS_CATALOG=$(curl -fsSL "$CATALOG_URL") || { echo "Failed to fetch app catalog." >&2; exit 1; }
 
 # ── App selection ────────────────────────────────────────────────────────────
 
