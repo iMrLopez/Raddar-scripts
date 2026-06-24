@@ -13,11 +13,11 @@ RESET='\033[0m'
 printf "${CYAN}"
 printf '╔══════════════════════════════════════════════════════╗\n'
 printf '║                                                      ║\n'
-printf "║    ${BOLD}Head Unit ADB Script${RESET}${CYAN}                                 ║\n"
+printf "║    ${BOLD}Head Unit ADB Script${RESET}${CYAN}                              ║\n"
 printf '║    ADB-based Android APK installer for head units    ║\n'
 printf '║                                                      ║\n'
 printf "║                                      ${DIM}by iMrLopez${RESET}${CYAN}     ║\n"
-printf "║                                              ${DIM}2025${RESET}${CYAN}     ║\n"
+printf "║                                              ${DIM}2025${RESET}${CYAN}    ║\n"
 printf '╚══════════════════════════════════════════════════════╝\n'
 printf "${RESET}\n"
 
