@@ -40,8 +40,8 @@
     "source": "brave/brave-browser"
   },
   {
-    "name": "ZLink5 (source iMrLopez/android-auto-carplay-geely)",
+    "name": "ZLink5 activado (source iMrLopez/android-auto-carplay-geely)",
     "type": "directdownload",
-    "source": "https://github.com/iMrLopez/head-unit-apps/blob/main/Zlink_stable.apk"
+    "source": "https://github.com/iMrLopez/head-unit-apps/raw/refs/heads/main/Zlink_stable_activado.apk"
   }
 ]
